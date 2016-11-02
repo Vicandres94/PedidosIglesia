@@ -1,0 +1,76 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.equipo.pedidosiglesia.Controller.Fragment_Registrar_Actividad">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_registrar_Actividad"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textColor="@color/abc_input_method_navigation_guard" />
+
+    <Spinner
+        android:layout_width="226dp"
+        android:layout_height="56dp"
+        android:spinnerMode="dropdown"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:contextClickable="false"
+        android:id="@+id/cbox_tipo_actividades"
+        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+        android:paddingTop="10dp"
+        android:textAlignment="center"
+        android:transitionGroup="false">
+
+    </Spinner>
+
+    <Button
+        android:layout_width="133dp"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:id="@+id/btnRegistrarActividad"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_Fecha_Actividad"
+        android:layout_marginTop="115dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#1764bb"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_Seleccione_Tipo_Actividad"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="45dp"
+        android:textColor="#1764bb"
+        android:textColorHighlight="#0b29bf"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal|top" />
+
+    <CalendarView
+        android:layout_width="315dp"
+        android:layout_height="332dp"
+        android:layout_marginTop="135dp"
+        android:id="@+id/calendarView"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+        android:backgroundTint="#217fb1" />
+
+</FrameLayout>

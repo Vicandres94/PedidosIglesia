@@ -1,0 +1,42 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.equipo.pedidosiglesia.Controller.Fragment_Lista_Actividades">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_lista_actividad"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp" />
+
+    <ListView
+        android:layout_width="286dp"
+        android:layout_height="362dp"
+        android:id="@+id/list_actividades"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:headerDividersEnabled="true"
+        android:backgroundTintMode="multiply"
+        android:backgroundTint="#cd9393"
+        android:layout_weight="0.74"
+        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+        android:layout_marginBottom="20dp"
+        android:contextClickable="true"
+
+        />
+
+    <Button
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:text="Nueva Actividad"
+        android:id="@+id/btnNuevaActividad_listAct"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textStyle="bold" />
+
+</FrameLayout>

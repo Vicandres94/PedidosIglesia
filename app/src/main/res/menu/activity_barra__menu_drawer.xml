@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Producto"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Productos" />
+        <item
+            android:id="@+id/nav_Actividades"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Actividades" />
+        <item
+            android:id="@+id/nav_Reportes"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Reportes" />
+        <item
+            android:id="@+id/nav_Personas"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Personas" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Configuración de Cuenta" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Cerrar Sesión" />
+        </menu>
+    </item>
+
+</menu>
