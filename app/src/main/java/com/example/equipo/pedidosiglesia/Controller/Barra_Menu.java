@@ -81,7 +81,6 @@ public class Barra_Menu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Boolean fragmento_seleccionado= false;
-        Toast.makeText(this,"Entro",Toast.LENGTH_SHORT).show();
 
         if (id == R.id.nav_Producto) {
             // Handle the camera action
