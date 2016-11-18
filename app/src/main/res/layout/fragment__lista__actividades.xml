@@ -27,8 +27,7 @@
         android:layout_weight="0.74"
         android:background="@drawable/abc_cab_background_top_mtrl_alpha"
         android:layout_marginBottom="20dp"
-        android:contextClickable="true"
-
+        android:clickable="true"
         />
 
     <Button

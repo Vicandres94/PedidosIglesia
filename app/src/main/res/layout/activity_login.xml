@@ -47,7 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:hint="Contraseña"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:id="@+id/etPassword" />
 
     <Button
         android:layout_width="154dp"
@@ -58,5 +59,13 @@
         android:layout_marginTop="20dp"
         android:elevation="5dp"
         android:singleLine="false" />
+
+    <ProgressBar
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.09"
+        android:indeterminate="false" />
 
 </LinearLayout>

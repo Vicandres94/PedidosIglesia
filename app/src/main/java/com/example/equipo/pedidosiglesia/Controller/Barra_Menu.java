@@ -1,5 +1,6 @@
 package com.example.equipo.pedidosiglesia.Controller;
 
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,15 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.equipo.pedidosiglesia.R;
 
 public class Barra_Menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener, Fragment_Lista_Actividades.OnFragmentInteractionListener,
         Fragment_Registrar_Actividad.OnFragmentInteractionListener, Fragment_Lista_Productos.OnFragmentInteractionListener,
-        Fragment_Registrar_Producto.OnFragmentInteractionListener {
+        Fragment_Registrar_Producto.OnFragmentInteractionListener, Fragment_Reportes.OnFragmentInteractionListener {
 
 
     protected Fragment fragmento = null;
@@ -94,13 +93,15 @@ public class Barra_Menu extends AppCompatActivity
 
 
         } else if (id == R.id.nav_Reportes) {
+            fragmento_seleccionado= true;
+            fragmento = new Fragment_Reportes();
 
         } else if (id == R.id.nav_Personas) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_Ajustes) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_Salir) {
+            finish();
         }
 
         if (fragmento_seleccionado){
@@ -118,7 +119,7 @@ public class Barra_Menu extends AppCompatActivity
         switch (v.getId())
         {
             case R.id.btnNuevaActividad_listAct:
-                Intent intent = new Intent(this,RegistrarActividad.class);
+                Intent intent = new Intent(this,Fragment_Registrar_Actividad.class);
                 startActivity(intent);
                 break;
         }

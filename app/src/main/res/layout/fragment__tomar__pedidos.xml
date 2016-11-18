@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.equipo.pedidosiglesia.Controller.Fragment_Tomar_Pedidos">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/msg_Tomar_Pedidos"
+        android:gravity="center_horizontal"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        />
+
+    <SearchView
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buscar_Persona_Pedido"
+        android:layout_marginTop="45dp"
+        android:layout_gravity="center_horizontal|top"
+        android:elevation="@dimen/abc_action_bar_elevation_material"
+        android:focusable="true"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:text="Guardar "
+        android:id="@+id/btn_Guardar_Pedido"
+        android:layout_gravity="center_horizontal|bottom"
+        android:elevation="@dimen/abc_action_bar_elevation_material" />
+
+    <ListView
+        android:layout_width="279dp"
+        android:layout_height="369dp"
+        android:id="@+id/list_tomar_Pedido"
+        android:layout_gravity="center"
+        android:elevation="@dimen/abc_action_bar_content_inset_material"
+        android:choiceMode="multipleChoiceModal" />
+
+</FrameLayout>

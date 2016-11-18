@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.equipo.pedidosiglesia.Controller.Fragment_Reportes">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TabHost
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tabs_Reportes"
+        android:layout_gravity="left|top"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/Reporte1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DFSDFSDFSDFSDFSDFSDFSDF"
+                        android:gravity="center"
+                        android:layout_marginTop="80dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Reporte2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="100dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Reporte3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        android:layout_marginTop="120dp"
+                        />
+                </LinearLayout>
+            </FrameLayout>
+        </FrameLayout>
+    </TabHost>
+</FrameLayout>

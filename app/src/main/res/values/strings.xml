@@ -14,6 +14,7 @@
         completions."
     </string>
     <string name="msg_lista_actividad">Lista Actividades</string>
+    <string name="msg_Reportes">Reportes</string>
     <string name="msg_lista_productos">Lista Productos</string>
     <string name="msg_registrar_Actividad"> Nueva Actividad</string>
     <string name="msg_registrar_Producto"> Nuevo Producto</string>
@@ -22,6 +23,7 @@
     <string name="msg_Fecha_Actividad">Fecha Actividad</string>
     <string name="msg_Seleccione_Tipo_Actividad">Tipo Actividad</string>
     <string name="title_activity_barra__menu">Pedidos</string>
+    <string name="msg_Tomar_Pedidos">Tomar Pedidos</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
