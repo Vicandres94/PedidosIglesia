@@ -1,10 +1,13 @@
 package com.example.equipo.pedidosiglesia.Controller;
 
 import android.app.Application;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,16 +17,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.equipo.pedidosiglesia.Modelo.Categorias;
+import com.example.equipo.pedidosiglesia.Modelo.ListCategorias;
 import com.example.equipo.pedidosiglesia.R;
+import com.example.equipo.pedidosiglesia.WebServices.Class_GetAsyncrona;
+import com.example.equipo.pedidosiglesia.WebServices.Class_SP_Lista_Categorias;
+import com.example.equipo.pedidosiglesia.WebServices.Class_SP_login;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class Barra_Menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener, Fragment_Lista_Actividades.OnFragmentInteractionListener,
         Fragment_Registrar_Actividad.OnFragmentInteractionListener, Fragment_Lista_Productos.OnFragmentInteractionListener,
-        Fragment_Registrar_Producto.OnFragmentInteractionListener, Fragment_Reportes.OnFragmentInteractionListener {
+        Fragment_Registrar_Producto.OnFragmentInteractionListener, Fragment_Reportes.OnFragmentInteractionListener, Fragment_List_Categorias.OnFragmentInteractionListener {
 
 
     protected Fragment fragmento = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +57,7 @@ public class Barra_Menu extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         fragmento = new Fragment_Lista_Actividades();
         getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor, fragmento ).commit();
+
     }
 
     @Override
@@ -49,7 +66,7 @@ public class Barra_Menu extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
         }
     }
 
@@ -100,8 +117,31 @@ public class Barra_Menu extends AppCompatActivity
 
         } else if (id == R.id.nav_Ajustes) {
 
-        } else if (id == R.id.nav_Salir) {
-            finish();
+        } else if (id == R.id.nav_Categoria){
+            fragmento_seleccionado= true;
+            fragmento = new Fragment_List_Categorias();
+        }
+        else if (id == R.id.nav_Salir) {
+            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+            dialogo1.setTitle("Aviso!");
+            dialogo1.setMessage("¿Desea Cerrar Sesión?");
+            dialogo1.setCancelable(false);
+            dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialogo1, int id) {
+                    Class_SP_login.deleteLogin(getApplicationContext());
+                    finish();
+                }
+            });
+
+            dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+                    dialogo1.dismiss();
+                }
+            });
+
+            dialogo1.show();
+
+
         }
 
         if (fragmento_seleccionado){

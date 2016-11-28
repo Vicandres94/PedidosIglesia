@@ -41,14 +41,19 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:id="@+id/etUsuario"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:id="@+id/etPassword" />
+        android:id="@+id/etPassword"
+        android:textAlignment="center"
+        android:focusable="true"/>
 
     <Button
         android:layout_width="154dp"
@@ -60,12 +65,5 @@
         android:elevation="5dp"
         android:singleLine="false" />
 
-    <ProgressBar
-        android:layout_width="61dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.09"
-        android:indeterminate="false" />
 
 </LinearLayout>

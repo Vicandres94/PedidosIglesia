@@ -1,0 +1,41 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controller.Fragment_List_Categorias">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/msg_lista_categoria"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                />
+
+            <ListView
+                android:layout_width="286dp"
+                android:layout_height="367dp"
+                android:id="@+id/listView_ListaCategorias"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+                android:layout_marginTop="20dp" />
+
+            <Button
+                android:layout_width="158dp"
+                android:layout_height="wrap_content"
+                android:text="Nueva Categoría"
+                android:id="@+id/btnNuevaCategoria_listaCategorias"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+</FrameLayout>

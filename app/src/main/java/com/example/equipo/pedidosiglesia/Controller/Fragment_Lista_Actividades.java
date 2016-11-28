@@ -20,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.equipo.pedidosiglesia.R;
+import com.example.equipo.pedidosiglesia.WebServices.Class_GetAsyncrona;
+import com.example.equipo.pedidosiglesia.WebServices.Class_SP_login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,6 +78,7 @@ public class Fragment_Lista_Actividades extends Fragment implements  View.OnClic
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment__lista__actividades, container, false);
+        //Toast.makeText(getContext(), Class_SP_login.getToken(getContext()).toString() , Toast.LENGTH_LONG).show();
         btnNuevaActividad = (Button) view.findViewById(R.id.btnNuevaActividad_listAct);
         btnNuevaActividad.setOnClickListener(this);
         list_actividades = (ListView) view.findViewById(R.id.list_actividades);
@@ -143,7 +146,8 @@ public class Fragment_Lista_Actividades extends Fragment implements  View.OnClic
                 case R.id.btnNuevaActividad_listAct:
                 /*Toast.makeText(getContext(), "Nueva Actividad", Toast.LENGTH_SHORT).show();
                 fragmento = new Fragment_Registrar_Actividad();*/
-                    setDialogRegistrarActividad();
+                   // setDialogRegistrarActividad();
+
 
                 //Intent intent = new Intent(getContext(),fragmento.getClass());
                 //startActivity(intent);
