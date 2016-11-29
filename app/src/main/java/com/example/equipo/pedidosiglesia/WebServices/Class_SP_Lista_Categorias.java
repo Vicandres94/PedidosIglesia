@@ -34,7 +34,7 @@ public class Class_SP_Lista_Categorias {
         setListaCategorias(context,"");
     }
 
-    public static String[] getLogin(Context spContext){
+    public static String[] getListaCategoria(Context spContext){
         String[] spl = new String[2];
         spl[0] = Class_SP_Lista_Categorias.getCategoriasList(spContext);
         return spl;

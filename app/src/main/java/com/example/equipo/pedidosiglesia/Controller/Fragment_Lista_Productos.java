@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +13,23 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.equipo.pedidosiglesia.R;
+import com.example.equipo.pedidosiglesia.WebServices.Class_GetAsyncrona;
+import com.example.equipo.pedidosiglesia.WebServices.Class_SP_Lista_Categorias;
+import com.example.equipo.pedidosiglesia.WebServices.Class_SP_Lista_Productos;
+import com.example.equipo.pedidosiglesia.WebServices.Class_SP_login;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_Lista_Productos.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_Lista_Productos#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Fragment_Lista_Productos extends Fragment implements  View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +39,11 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
     protected Button btnNuevoProducto;
     protected ListView list_productos;
     protected ArrayAdapter arrayAdapter;
+    protected JSONArray productosJson;
+    protected JSONObject productoObJson;
+    Class_SP_Lista_Productos sp_lista_productos;
+    private Spinner spinner_categorias;
+    String[] vec;
 
 
     // TODO: Rename and change types of parameters
@@ -48,14 +56,7 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Lista_Productos.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static Fragment_Lista_Productos newInstance(String param1, String param2) {
         Fragment_Lista_Productos fragment = new Fragment_Lista_Productos();
@@ -83,35 +84,29 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
         btnNuevoProducto = (Button) view.findViewById(R.id.btnNuevoProducto_listaProductos);
         btnNuevoProducto.setOnClickListener(this);
         list_productos = (ListView) view.findViewById(R.id.list_productos);
-        JSONObject object = new JSONObject();
-        JSONObject object2 = new JSONObject();
-        JSONObject object3 = new JSONObject();
-        JSONObject object4 = new JSONObject();
-        String[] vec= new String[8];
-        try {
-            object.put("name" , "Empanadas");
-            object.put("fecha", "$1000");
-            vec[0] = object.getString("name");
-            vec[1] = object.getString("fecha");
-            object2.put("name2" , "Postres");
-            object2.put("fecha2", "$5000");
-            vec[2] = object2.getString("name2");
-            vec[3] = object2.getString("fecha2");
-            object3.put("name3" , "Almuerzos");
-            object3.put("fecha3", "$5000");
-            vec[4] = object3.getString("name3");
-            vec[5] = object3.getString("fecha3");
-            object4.put("name4" , "Hallacas");
-            object4.put("fecha4", "$3000");
-            vec[6] = object4.getString("name4");
-            vec[7] = object4.getString("fecha4");
-//
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        arrayAdapter = new ArrayAdapter(getContext(),R.layout.layout_items_registrador,R.id.txt_registrados,vec);
-        list_productos.setAdapter(arrayAdapter);
+        obtenerProductos();
         return view;
+    }
+
+    public void obtenerProductos(){
+        Class_SP_Lista_Productos.deleteProducto(getContext());
+        Class_GetAsyncrona getAsyncrona = (Class_GetAsyncrona) new Class_GetAsyncrona(getContext(), new Class_GetAsyncrona.AsyncResponse()
+        {
+            @Override
+            public void processFinish(String output) throws JSONException {
+                JSONObject respuesta = new JSONObject(output);
+                //-----------------------------------------------------------------------------------
+                productosJson = respuesta.getJSONArray("datos");
+                vec = new String[productosJson.length()];
+                for (int i = 0; i < productosJson.length(); i++) {
+                    JSONObject c = productosJson.getJSONObject(i);
+
+                    vec[i] = (productosJson.getJSONObject(i).getString("producto")).concat("     $"+ productosJson.getJSONObject(i).getString("valor"));
+                }
+                arrayAdapter = new ArrayAdapter(getContext(),R.layout.layout_items_registrador,R.id.txt_registrados,vec);
+                list_productos.setAdapter(arrayAdapter);
+            }
+        }).execute("http://android.diosfuentedepodervalledupar.com/public/api/GetProductos?token="+ Class_SP_login.getToken(getContext()));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -143,8 +138,6 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
         switch (v.getId())
         {
             case R.id.btnNuevoProducto_listaProductos:
-
-                Toast.makeText(getContext(), "Nuevo Producto", Toast.LENGTH_SHORT).show();
                 setDialogRegistrarProducto();
                 break;
         }
@@ -154,12 +147,29 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
     {
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.fragment__registrar__producto);
-        dialog.setTitle("Agregar Producto");
-
-
+        dialog.setTitle("Agregar Producto");//
         // set the custom dialog components - text, image and button
         Button btnRegistrarProducto = (Button) dialog.findViewById(R.id.btnRegistrarProducto);
+        spinner_categorias = (Spinner) dialog.findViewById(R.id.spinner_Categoria_RegistrarProducto);
         // if button is clicked, close the custom dialog
+        Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+        Class_GetAsyncrona get = (Class_GetAsyncrona) new Class_GetAsyncrona(getContext(), new Class_GetAsyncrona.AsyncResponse()
+        {
+            @Override
+            public void processFinish(String output) throws JSONException {
+
+                JSONObject respuesta = new JSONObject(output);
+                List<String> list = new ArrayList<String>();
+                //-----------------------------------------------------------------------------------
+                JSONArray categoriasJson = respuesta.getJSONArray("datos");
+                for (int i = 0; i < categoriasJson.length(); i++) {
+                    list.add(categoriasJson.getJSONObject(i).getString("categoria"));
+                }
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item,list);
+                spinner_categorias.setAdapter(dataAdapter);
+                //Toast.makeText(getContext(), list.toString(),Toast.LENGTH_SHORT).show();
+            }
+        }).execute("http://android.diosfuentedepodervalledupar.com/public/api/GetCategorias?token="+ Class_SP_login.getToken(getContext()));
         btnRegistrarProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,16 +187,7 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
         window.setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

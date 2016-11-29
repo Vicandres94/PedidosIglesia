@@ -1,4 +1,4 @@
-package com.example.equipo.pedidosiglesia;
+package com.example.equipo.pedidosiglesia.Controller;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.equipo.pedidosiglesia.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Fragment_SubMenu.OnFragmentInteractionListener} interface
+ * {@link Fragment_SubMenu_Categorias.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment_SubMenu#newInstance} factory method to
+ * Use the {@link Fragment_SubMenu_Categorias#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_SubMenu extends Fragment {
+public class Fragment_SubMenu_Categorias extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +31,7 @@ public class Fragment_SubMenu extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Fragment_SubMenu() {
+    public Fragment_SubMenu_Categorias() {
         // Required empty public constructor
     }
 
@@ -39,11 +41,11 @@ public class Fragment_SubMenu extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_SubMenu.
+     * @return A new instance of fragment Fragment_SubMenu_Categorias.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_SubMenu newInstance(String param1, String param2) {
-        Fragment_SubMenu fragment = new Fragment_SubMenu();
+    public static Fragment_SubMenu_Categorias newInstance(String param1, String param2) {
+        Fragment_SubMenu_Categorias fragment = new Fragment_SubMenu_Categorias();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

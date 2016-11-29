@@ -3,6 +3,7 @@ package com.example.equipo.pedidosiglesia.WebServices;
 
 
 import com.example.equipo.pedidosiglesia.Modelo.Categorias;
+import com.example.equipo.pedidosiglesia.Modelo.Productos;
 import com.example.equipo.pedidosiglesia.Modelo.Users;
 
 import org.json.JSONException;
@@ -26,6 +27,16 @@ public class Class_map_to_Json {
         JSONObject dato = new JSONObject();
         dato.put("categoriasId", categorias.getCategoriasId());
         dato.put("categoria", categorias.getCategoria());
+        return dato.toString();
+    }
+
+    public static String JSONObject_Productos(Productos productos) throws JSONException {
+
+        JSONObject dato = new JSONObject();
+        dato.put("productosId", productos.getProductosId());
+        dato.put("categoriasId", productos.getCategoriasId());
+        dato.put("producto", productos.getProducto());
+        dato.put("valor", productos.getValor());
         return dato.toString();
     }
 

@@ -129,6 +129,7 @@ public class Barra_Menu extends AppCompatActivity
             dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialogo1, int id) {
                     Class_SP_login.deleteLogin(getApplicationContext());
+                    Class_SP_Lista_Categorias.deleteListaCategoria(getApplicationContext());
                     finish();
                 }
             });

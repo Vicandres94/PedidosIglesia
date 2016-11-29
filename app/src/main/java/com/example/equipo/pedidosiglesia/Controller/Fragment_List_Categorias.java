@@ -97,10 +97,7 @@ public class Fragment_List_Categorias extends Fragment implements View.OnClickLi
         list_categorias = (ListView) view.findViewById(R.id.listView_ListaCategorias);
         list_categorias.setOnItemLongClickListener(new ItemPresionado());
         list_categorias.setOnItemClickListener(new Item());
-
-        //list_categorias.setOnCreateContextMenuListener(new ItemPresionado());
         obtenerCategorias();
-
         return view;
     }
 

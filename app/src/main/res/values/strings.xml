@@ -21,7 +21,7 @@
     <string name="msg_registrar_Categoria"> Nueva Categoria</string>
     <string name="msg_registrar_Producto"> Nuevo Producto</string>
     <string name="msg_nombre_Producto">Nombre Producto</string>
-    <string name="msg_nombre_Categoria">Nombre Categoria</string>
+    <string name="msg_nombre_Categoria">Categoria</string>
     <string name="msg_valor_Producto">Valor Unitario ($)</string>
     <string name="msg_Fecha_Actividad">Fecha Actividad</string>
     <string name="msg_Seleccione_Tipo_Actividad">Tipo Actividad</string>

@@ -4,12 +4,25 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.equipo.pedidosiglesia.R;
+import com.example.equipo.pedidosiglesia.WebServices.Class_GetAsyncrona;
+import com.example.equipo.pedidosiglesia.WebServices.Class_SP_Lista_Categorias;
+import com.example.equipo.pedidosiglesia.WebServices.Class_SP_login;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,19 +43,17 @@ public class Fragment_Registrar_Producto extends Fragment implements View.OnClic
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    protected JSONArray categoriasJson;
+    protected JSONObject categoriaObJson;
+    Class_SP_Lista_Categorias sp_lista_categorias;
+    Spinner spinner_categorias;
+    private List<String> list;
 
     public Fragment_Registrar_Producto() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Registrar_Producto.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static Fragment_Registrar_Producto newInstance(String param1, String param2) {
         Fragment_Registrar_Producto fragment = new Fragment_Registrar_Producto();
@@ -66,7 +77,8 @@ public class Fragment_Registrar_Producto extends Fragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__registrar__producto, container, false);
+        View view = inflater.inflate(R.layout.fragment__registrar__producto, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
