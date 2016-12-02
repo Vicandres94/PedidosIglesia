@@ -51,17 +51,9 @@ public class Class_GetAsyncrona extends AsyncTask<String,Integer,String> {
             del.setHeader("content-type", "application/json");
             HttpResponse resp = httpClient.execute(del);
             String respuesta = EntityUtils.toString(resp.getEntity());
-            Log.e("Error: ", respuesta);
-            JSONObject jsonresultentrada = new JSONObject(respuesta);
-            String resultado = String.valueOf(jsonresultentrada.get("error"));
-            if (!resultado.equals("false")){
-                resul = "";
-            }else {
-                resul = respuesta;
-            }
-            if(resultado.equals("token_expired")){
-                resul = "Tu sesión ha expirado. Volviendo a pantalla de inicio de sesión.";
-            }
+            //Log.e("Error: ", respuesta);
+            resul = respuesta;
+
         }catch(Exception ex)
         {
             Log.e("ServicioRest", "Error!", ex);

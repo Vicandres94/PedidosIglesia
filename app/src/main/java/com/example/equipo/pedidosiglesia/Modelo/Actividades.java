@@ -15,10 +15,23 @@ public class Actividades {
     private int recaudo;
     private int iglesiasId;
 
+    public Actividades(int actividadesId) {
+        this.actividadesId = actividadesId;
+    }
+
     public Actividades(int categoriasId, String fecha, String estado, int iglesiasId) {
         this.categoriasId = categoriasId;
         this.fechaString = fecha;
         this.estado = estado;
+        this.iglesiasId = iglesiasId;
+    }
+
+    public Actividades(int actividadesId, int categoriasId, String estado, String fechaString, int invesion, int iglesiasId) {
+        this.actividadesId = actividadesId;
+        this.categoriasId = categoriasId;
+        this.estado = estado;
+        this.fechaString = fechaString;
+        this.invesion = invesion;
         this.iglesiasId = iglesiasId;
     }
 

@@ -107,6 +107,14 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
             public void processFinish(String output) throws JSONException {
                 JSONObject respuesta = new JSONObject(output);
                 //-----------------------------------------------------------------------------------
+                if (respuesta.getString("error").equals("token_expired")){
+                    Class_SP_login.deleteLogin(getContext());
+                    Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+                    Toast.makeText(getContext(), "Su Sesión ha Expirado, vuelva a Iniciarla....",Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                    //Toast.makeText(getContext(), respuesta.getString("error").toString(),Toast.LENGTH_SHORT).show();
+                }
+
                 productosJson = respuesta.getJSONArray("datos");
                 vec = new String[productosJson.length()];
                 for (int i = 0; i < productosJson.length(); i++) {
@@ -208,8 +216,12 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
                                         JSONObject respuesta = new JSONObject(output);
                                         if ((respuesta.getString("error").toString()).equals("false")) {
                                             Toast.makeText(getContext(), respuesta.getString("mensaje"), Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                                        } else if (respuesta.getString("error").equals("token_expired")){
+                                            Class_SP_login.deleteLogin(getContext());
+                                            Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+                                            Toast.makeText(getContext(), "Su Sesión ha Expirado, vuelva a Iniciarla....",Toast.LENGTH_SHORT).show();
+                                            getActivity().finish();
+                                            //Toast.makeText(getContext(), respuesta.getString("error").toString(),Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }).execute("http://android.diosfuentedepodervalledupar.com/public/api/CrearProducto?token=" + Class_SP_login.getToken(getContext()));
@@ -266,8 +278,12 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
                                 JSONObject respuesta = new JSONObject(output);
                                 if ((respuesta.getString("error").toString()).equals("false")) {
                                     Toast.makeText(getContext(), respuesta.getString("mensaje"), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                                } else if (respuesta.getString("error").equals("token_expired")){
+                                    Class_SP_login.deleteLogin(getContext());
+                                    Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+                                    Toast.makeText(getContext(), "Su Sesión ha Expirado, vuelva a Iniciarla....",Toast.LENGTH_SHORT).show();
+                                    getActivity().finish();
+                                    //Toast.makeText(getContext(), respuesta.getString("error").toString(),Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).execute("http://android.diosfuentedepodervalledupar.com/public/api/ModificarProducto?token=" + Class_SP_login.getToken(getContext()));
@@ -292,8 +308,12 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
                             JSONObject respuesta = new JSONObject(output);
                             if ((respuesta.getString("error").toString()).equals("false")) {
                                 Toast.makeText(getContext(), respuesta.getString("mensaje"), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                            } else if (respuesta.getString("error").equals("token_expired")){
+                                Class_SP_login.deleteLogin(getContext());
+                                Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+                                Toast.makeText(getContext(), "Su Sesión ha Expirado, vuelva a Iniciarla....",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                                //Toast.makeText(getContext(), respuesta.getString("error").toString(),Toast.LENGTH_SHORT).show();
                             }
                         }
                     }).execute("http://android.diosfuentedepodervalledupar.com/public/api/EliminarProducto?token=" + Class_SP_login.getToken(getContext()));

@@ -1,0 +1,110 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="325dp"
+    tools:context="com.example.equipo.pedidosiglesia.Controller.Fragment_Lista_Actividades">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalles Actividad"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/md_light_blue_800" />
+
+    <Spinner
+        android:layout_width="254dp"
+        android:layout_height="56dp"
+        android:id="@+id/spinner_Categoria_Modificar_Actividad"
+        android:layout_gravity="center_horizontal|top"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="70dp"
+        android:paddingTop="5dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+        android:scrollbarStyle="insideInset"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_Fecha_Actividad"
+        android:layout_marginTop="135dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#1764bb"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_inversion"
+        android:layout_gravity="center_horizontal|bottom"
+        android:hint="Inversión"
+        android:clickable="false"
+        android:textAlignment="center"
+        android:layout_marginBottom="60dp"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_Seleccione_Tipo_Actividad"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="45dp"
+        android:textColor="#1764bb"
+        android:textColorHighlight="#0b29bf"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal|top" />
+
+    <EditText
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_fecha_modificar_actividad"
+        android:layout_gravity="center_horizontal|bottom"
+        android:hint="Modifique Fecha"
+        android:clickable="true"
+        android:textAlignment="center"
+        android:layout_marginBottom="120dp"
+        android:focusable="false"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inversión"
+        android:layout_marginTop="203dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#1764bb"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+    android:layout_width="133dp"
+    android:layout_height="wrap_content"
+    android:text="Actualizar"
+    android:id="@+id/btnModificarActividad"
+    android:layout_gravity="left|bottom"
+    android:textStyle="bold"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="15dp"/>
+
+    <Button
+        android:layout_width="133dp"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:id="@+id/btnEliminarActividad"
+        android:layout_gravity="right|bottom"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="15dp"/>
+
+</FrameLayout>

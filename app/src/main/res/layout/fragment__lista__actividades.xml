@@ -16,7 +16,7 @@
         android:layout_marginTop="15dp" />
 
     <ListView
-        android:layout_width="286dp"
+        android:layout_width="match_parent"
         android:layout_height="362dp"
         android:id="@+id/list_actividades"
         android:layout_gravity="center"

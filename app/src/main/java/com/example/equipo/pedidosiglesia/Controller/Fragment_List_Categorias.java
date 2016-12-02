@@ -139,9 +139,12 @@ public class Fragment_List_Categorias extends Fragment implements View.OnClickLi
                                             vec[categoriasJson.length()] = etCategoria.getText().toString();
                                             arrayAdapter = new ArrayAdapter(getContext(),R.layout.layout_items_registrador,R.id.txt_registrados,vec);
                                             list_categorias.setAdapter(arrayAdapter);
-                                        } else {
-                                            //Log.d("Error", output);
-                                            Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                                        } else if (respuesta.getString("error").equals("token_expired")){
+                                            Class_SP_login.deleteLogin(getContext());
+                                            Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+                                            Toast.makeText(getContext(), "Su Sesión ha Expirado, vuelva a Iniciarla....",Toast.LENGTH_SHORT).show();
+                                            getActivity().finish();
+                                            //Toast.makeText(getContext(), respuesta.getString("error").toString(),Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }).execute("http://android.diosfuentedepodervalledupar.com/public/api/CrearCategoria?token=" + Class_SP_login.getToken(getContext()));
@@ -193,8 +196,12 @@ public class Fragment_List_Categorias extends Fragment implements View.OnClickLi
                                         JSONObject respuesta = new JSONObject(output);
                                         if ((respuesta.getString("error").toString()).equals("false")) {
                                             Toast.makeText(getContext(), respuesta.getString("mensaje"), Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                                        } else if (respuesta.getString("error").equals("token_expired")){
+                                            Class_SP_login.deleteLogin(getContext());
+                                            Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+                                            Toast.makeText(getContext(), "Su Sesión ha Expirado, vuelva a Iniciarla....",Toast.LENGTH_SHORT).show();
+                                            getActivity().finish();
+                                            //Toast.makeText(getContext(), respuesta.getString("error").toString(),Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }).execute("http://android.diosfuentedepodervalledupar.com/public/api/ModificarCategoria?token=" + Class_SP_login.getToken(getContext()));
@@ -219,8 +226,12 @@ public class Fragment_List_Categorias extends Fragment implements View.OnClickLi
                             JSONObject respuesta = new JSONObject(output);
                             if ((respuesta.getString("error").toString()).equals("false")) {
                                 Toast.makeText(getContext(), respuesta.getString("mensaje"), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                            } else if (respuesta.getString("error").equals("token_expired")){
+                                Class_SP_login.deleteLogin(getContext());
+                                Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+                                Toast.makeText(getContext(), "Su Sesión ha Expirado, vuelva a Iniciarla....",Toast.LENGTH_SHORT).show();
+                                getActivity().finish();
+                                //Toast.makeText(getContext(), respuesta.getString("error").toString(),Toast.LENGTH_SHORT).show();
                             }
                         }
                     }).execute("http://android.diosfuentedepodervalledupar.com/public/api/EliminarCategoria?token=" + Class_SP_login.getToken(getContext()));
@@ -245,6 +256,13 @@ public class Fragment_List_Categorias extends Fragment implements View.OnClickLi
             public void processFinish(String output) throws JSONException {
                 JSONObject respuesta = new JSONObject(output);
                 //-----------------------------------------------------------------------------------
+                if (respuesta.getString("error").equals("token_expired")){
+                    Class_SP_login.deleteLogin(getContext());
+                    Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
+                    Toast.makeText(getContext(), "Su Sesión ha Expirado, vuelva a Iniciarla....",Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                    //Toast.makeText(getContext(), respuesta.getString("error").toString(),Toast.LENGTH_SHORT).show();
+                }
                 categoriasJson = respuesta.getJSONArray("datos");
                 vec = new String[categoriasJson.length()];
                 for (int i = 0; i < categoriasJson.length(); i++) {
@@ -282,7 +300,7 @@ public class Fragment_List_Categorias extends Fragment implements View.OnClickLi
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(getContext(), "Mantenga Presionado para Editar o Eliminar elemento.." , Toast.LENGTH_SHORT).show();
+           //Toast.makeText(getContext(), "Mantenga Presionado para Editar o Eliminar elemento.." , Toast.LENGTH_SHORT).show();
         }
     }
 
