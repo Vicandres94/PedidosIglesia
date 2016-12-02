@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/msg_registrar_Producto"
+        android:text="Detalles Producto"
         android:gravity="center"
         android:textSize="24sp"
         android:layout_marginTop="10dp"
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/msg_nombre_Producto"
+        android:text="Producto"
         android:gravity="center"
         android:textSize="22dp"
         android:layout_marginTop="145dp"
@@ -46,7 +46,7 @@
         android:textAlignment="center"
         android:hint="Producto"
         android:focusable="true"
-        android:id="@+id/txt_Nombre_producto"
+        android:id="@+id/et_Nombre_producto"
         />
 
     <TextView
@@ -70,28 +70,38 @@
         android:textAlignment="center"
         android:hint="Valor Unitario "
         android:focusable="true"
-        android:id="@+id/txt_valor_uniario"
+        android:id="@+id/et_valor_uniario"
         />
 
     <Button
         android:layout_width="133dp"
         android:layout_height="wrap_content"
-        android:text="Guardar"
-        android:id="@+id/btnRegistrarProducto"
-        android:layout_gravity="center_horizontal|bottom"
+        android:text="Modificar"
+        android:id="@+id/btnModificarProducto"
+        android:layout_gravity="left|bottom"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        />
+
+    <Button
+        android:layout_width="133dp"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:id="@+id/btnEliminarProducto"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="30dp"
         android:textStyle="bold"
         />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner_Categoria_RegistrarProducto"
+        android:id="@+id/spinner_Categoria_Modificar_Producto"
         android:layout_gravity="center_horizontal|top"
         android:spinnerMode="dropdown"
         android:layout_marginTop="80dp"
         android:paddingTop="5dp"
         android:gravity="center_horizontal"
-        android:textAlignment="center"
         android:background="@drawable/abc_cab_background_top_mtrl_alpha" />
 
 

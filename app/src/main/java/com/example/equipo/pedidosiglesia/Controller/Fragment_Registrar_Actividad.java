@@ -14,14 +14,7 @@ import android.widget.Toast;
 
 import com.example.equipo.pedidosiglesia.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_Registrar_Actividad.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_Registrar_Actividad#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_Registrar_Actividad extends Fragment implements View.OnClickListener  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,11 +54,6 @@ public class Fragment_Registrar_Actividad extends Fragment implements View.OnCli
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment__registrar__actividad, container, false);
-
-        Spinner spinner_actividades = (Spinner) view.findViewById(R.id.cbox_tipo_actividades);
-        ArrayAdapter spinner_adapter = ArrayAdapter.createFromResource( getContext(), R.array.tipo_actividades , android.R.layout.simple_spinner_item);
-       // spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_actividades.setAdapter(spinner_adapter);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -99,11 +87,7 @@ public class Fragment_Registrar_Actividad extends Fragment implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-                case R.id.btnRegistrarActividad:
-                    Toast.makeText(getContext(), "Guardando...", Toast.LENGTH_SHORT).show();
-                break;
-        }
+
     }
 
     /**

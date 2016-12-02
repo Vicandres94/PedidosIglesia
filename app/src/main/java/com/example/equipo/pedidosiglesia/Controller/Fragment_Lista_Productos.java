@@ -10,17 +10,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.equipo.pedidosiglesia.Modelo.Categorias;
+import com.example.equipo.pedidosiglesia.Modelo.Productos;
 import com.example.equipo.pedidosiglesia.R;
 import com.example.equipo.pedidosiglesia.WebServices.Class_GetAsyncrona;
+import com.example.equipo.pedidosiglesia.WebServices.Class_PostAsyncrona;
+import com.example.equipo.pedidosiglesia.WebServices.Class_PutAsyncrona;
 import com.example.equipo.pedidosiglesia.WebServices.Class_SP_Lista_Categorias;
 import com.example.equipo.pedidosiglesia.WebServices.Class_SP_Lista_Productos;
 import com.example.equipo.pedidosiglesia.WebServices.Class_SP_login;
+import com.example.equipo.pedidosiglesia.WebServices.Class_map_to_Json;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,10 +48,12 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
     protected ListView list_productos;
     protected ArrayAdapter arrayAdapter;
     protected JSONArray productosJson;
+    protected JSONArray categoriasJson;
     protected JSONObject productoObJson;
-    Class_SP_Lista_Productos sp_lista_productos;
     private Spinner spinner_categorias;
     String[] vec;
+    private  EditText et_Producto;
+    private EditText et_Valor;
 
 
     // TODO: Rename and change types of parameters
@@ -84,6 +94,7 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
         btnNuevoProducto = (Button) view.findViewById(R.id.btnNuevoProducto_listaProductos);
         btnNuevoProducto.setOnClickListener(this);
         list_productos = (ListView) view.findViewById(R.id.list_productos);
+        list_productos.setOnItemLongClickListener(new ItemPresionado());
         obtenerProductos();
         return view;
     }
@@ -143,15 +154,7 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
         }
     }
 
-    private void setDialogRegistrarProducto()
-    {
-        final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.fragment__registrar__producto);
-        dialog.setTitle("Agregar Producto");//
-        // set the custom dialog components - text, image and button
-        Button btnRegistrarProducto = (Button) dialog.findViewById(R.id.btnRegistrarProducto);
-        spinner_categorias = (Spinner) dialog.findViewById(R.id.spinner_Categoria_RegistrarProducto);
-        // if button is clicked, close the custom dialog
+    public  void llenarSpiner(){
         Class_SP_Lista_Categorias.deleteListaCategoria(getContext());
         Class_GetAsyncrona get = (Class_GetAsyncrona) new Class_GetAsyncrona(getContext(), new Class_GetAsyncrona.AsyncResponse()
         {
@@ -161,7 +164,7 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
                 JSONObject respuesta = new JSONObject(output);
                 List<String> list = new ArrayList<String>();
                 //-----------------------------------------------------------------------------------
-                JSONArray categoriasJson = respuesta.getJSONArray("datos");
+                categoriasJson = respuesta.getJSONArray("datos");
                 for (int i = 0; i < categoriasJson.length(); i++) {
                     list.add(categoriasJson.getJSONObject(i).getString("categoria"));
                 }
@@ -170,14 +173,134 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
                 //Toast.makeText(getContext(), list.toString(),Toast.LENGTH_SHORT).show();
             }
         }).execute("http://android.diosfuentedepodervalledupar.com/public/api/GetCategorias?token="+ Class_SP_login.getToken(getContext()));
+    }
+
+    private void setDialogRegistrarProducto()
+    {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.fragment__registrar__producto);
+        dialog.setTitle("Agregar Producto");//
+        // set the custom dialog components - text, image and button
+        Button btnRegistrarProducto = (Button) dialog.findViewById(R.id.btnRegistrarProducto);
+        spinner_categorias = (Spinner) dialog.findViewById(R.id.spinner_Categoria_RegistrarProducto);
+        et_Producto = (EditText) dialog.findViewById(R.id.txt_Nombre_producto);
+        et_Valor = (EditText) dialog.findViewById(R.id.txt_valor_uniario);
+        llenarSpiner();
+        // if button is clicked, close the custom dialog
         btnRegistrarProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Toast.makeText(getContext(),spinner_categorias.getAdapter().getItem(spinner_categorias.getSelectedItemPosition()).toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),categoriasJson.getJSONObject(spinner_categorias.getSelectedItemPosition()).getString("categoriasId").toString(),Toast.LENGTH_SHORT).show();
                 switch (v.getId()) {
                     case R.id.btnRegistrarProducto:
-                        Toast.makeText(getContext(), "Guardando Producto...", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                        if (et_Producto.getText().toString().equals("") || et_Valor.getText().toString().equals("")){
+                            Toast.makeText(getContext(), "Campos Vacíos!!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                           try {
+                               int id = Integer.parseInt(categoriasJson.getJSONObject(spinner_categorias.getSelectedItemPosition()).getString("categoriasId"));
+                                Productos producto = new Productos(id,et_Producto.getText().toString(),Integer.parseInt(et_Valor.getText().toString()));
+                                Class_PostAsyncrona postCrearProducto = (Class_PostAsyncrona) new Class_PostAsyncrona(Class_map_to_Json.JSONObject_Productos(producto), getContext(), new Class_PostAsyncrona.AsyncResponse() {
+
+                                    @Override
+                                    public void processFinish(String output) throws JSONException {
+                                        JSONObject respuesta = new JSONObject(output);
+                                        if ((respuesta.getString("error").toString()).equals("false")) {
+                                            Toast.makeText(getContext(), respuesta.getString("mensaje"), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }).execute("http://android.diosfuentedepodervalledupar.com/public/api/CrearProducto?token=" + Class_SP_login.getToken(getContext()));
+                                dialog.dismiss();
+                                obtenerProductos();
+                            }catch(JSONException e){
+                                e.printStackTrace();
+                            }
+                        }
                         break;
+                }
+             }
+        });
+
+        dialog.show();
+        Window window = dialog.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
+    private void setDialogMenuItem()
+    {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.fragment__modificar_eliminar__producto);
+        dialog.setTitle("Detalles Producto");
+        // set the custom dialog components - text, image and button
+        Button btnModificarProducto = (Button) dialog.findViewById(R.id.btnModificarProducto);
+        Button btnEliminarProducto = (Button) dialog.findViewById(R.id.btnEliminarProducto);
+        spinner_categorias = (Spinner) dialog.findViewById(R.id.spinner_Categoria_Modificar_Producto);
+        llenarSpiner();
+        et_Producto = (EditText) dialog.findViewById(R.id.et_Nombre_producto);
+        et_Valor = (EditText) dialog.findViewById(R.id.et_valor_uniario);
+        try {
+            et_Producto.setText(productoObJson.getString("producto").toString(), TextView.BufferType.NORMAL);
+            et_Valor.setText(productoObJson.getString("valor").toString(), TextView.BufferType.NORMAL);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        // if button is clicked, close the custom dialog
+        btnModificarProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et_Producto.getText().toString().equals("") || et_Valor.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), "Campos Vacios!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    try {
+                        int id = Integer.parseInt(categoriasJson.getJSONObject(spinner_categorias.getSelectedItemPosition()).getString("categoriasId"));
+                        int idP = Integer.parseInt(productoObJson.getString("productosId"));
+
+                        Productos producto = new Productos(idP,id,et_Producto.getText().toString(),Integer.parseInt(et_Valor.getText().toString()));
+                        Class_PostAsyncrona postModificarProducto = (Class_PostAsyncrona) new Class_PostAsyncrona(Class_map_to_Json.JSONObject_Productos(producto), getContext(), new Class_PostAsyncrona.AsyncResponse() {
+                            @Override
+                            public void processFinish(String output) throws JSONException {
+                                JSONObject respuesta = new JSONObject(output);
+                                if ((respuesta.getString("error").toString()).equals("false")) {
+                                    Toast.makeText(getContext(), respuesta.getString("mensaje"), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }).execute("http://android.diosfuentedepodervalledupar.com/public/api/ModificarProducto?token=" + Class_SP_login.getToken(getContext()));
+                        obtenerProductos();
+                        dialog.dismiss();
+                    }catch(JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        btnEliminarProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Productos producto = new Productos( Integer.parseInt(productoObJson.getString("productosId")));
+                    Class_PutAsyncrona putEliminarProducto = (Class_PutAsyncrona) new Class_PutAsyncrona(Class_map_to_Json.JSONObject_Productos(producto), getContext(), new Class_PutAsyncrona.AsyncResponse(){
+
+                        @Override
+                        public void processFinish(String output) throws JSONException {
+                            JSONObject respuesta = new JSONObject(output);
+                            if ((respuesta.getString("error").toString()).equals("false")) {
+                                Toast.makeText(getContext(), respuesta.getString("mensaje"), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).execute("http://android.diosfuentedepodervalledupar.com/public/api/EliminarProducto?token=" + Class_SP_login.getToken(getContext()));
+                    obtenerProductos();
+                    dialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -187,6 +310,23 @@ public class Fragment_Lista_Productos extends Fragment implements  View.OnClickL
         window.setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
+    class  ItemPresionado implements  AdapterView.OnItemLongClickListener{
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+            String ojb  = productosJson.optString(position);
+            try {
+                productoObJson = new JSONObject(ojb);
+                //Toast.makeText(getContext(),productoObJson.toString(),Toast.LENGTH_SHORT).show();
+                setDialogMenuItem();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return false;
+        }
+    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

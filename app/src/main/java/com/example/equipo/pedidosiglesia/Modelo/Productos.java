@@ -7,7 +7,15 @@ public class Productos {
     protected String producto;
     protected int valor;
 
+    public Productos(int productosId) {
+        this.productosId = productosId;
+    }
 
+    public Productos(int categoriasId, String producto, int valor) {
+        this.categoriasId = categoriasId;
+        this.producto = producto;
+        this.valor = valor;
+    }
 
     public Productos(int productosId, int categoriasId, String producto, int valor) {
         this.productosId = productosId;

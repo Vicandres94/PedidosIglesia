@@ -65,8 +65,8 @@ public class  Class_PostAsyncrona extends AsyncTask<String,Integer,String> {
             String resultado = String.valueOf(jsonresultentrada.get("error"));
             //Log.e("errorr",jsonresultentrada.toString());
             if(resultado.equals("token_expired")){
-                //resul = "Tu sesión ha expirado. Volviendo a pantalla de inicio de sesión.";
-                resul = resultado;
+                resul = "Tu sesión ha expirado. Volviendo a pantalla de inicio de sesión.";
+                //resul = resultado;
             }else if (!resultado.equals("false"))
             {
                 resul = "";
