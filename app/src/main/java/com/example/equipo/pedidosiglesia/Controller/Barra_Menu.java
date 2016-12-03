@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class Barra_Menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener, Fragment_Lista_Actividades.OnFragmentInteractionListener,
         Fragment_Registrar_Actividad.OnFragmentInteractionListener, Fragment_Lista_Productos.OnFragmentInteractionListener,
-        Fragment_Registrar_Producto.OnFragmentInteractionListener, Fragment_Reportes.OnFragmentInteractionListener, Fragment_List_Categorias.OnFragmentInteractionListener {
+        Fragment_Registrar_Producto.OnFragmentInteractionListener,  Fragment_List_Categorias.OnFragmentInteractionListener {
 
 
     protected Fragment fragmento = null;
@@ -111,7 +111,9 @@ public class Barra_Menu extends AppCompatActivity
 
         } else if (id == R.id.nav_Reportes) {
             fragmento_seleccionado= true;
-            fragmento = new Fragment_Reportes();
+            //fragmento = new Fragment_Reportes();
+            Intent intentBarra = new Intent(getApplicationContext(), Fragment_Reportes.class);
+            startActivity(intentBarra);
 
         } else if (id == R.id.nav_Personas) {
 

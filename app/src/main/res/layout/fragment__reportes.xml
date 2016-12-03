@@ -1,73 +1,39 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.equipo.pedidosiglesia.Controller.Fragment_Reportes">
+    android:orientation="vertical"
+    tools:context=".Controller.Barra_Menu">
 
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:orientation="vertical">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            tools:ignore="UnusedAttribute"/>
 
-    <TabHost
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@android:color/background_dark"
+            android:fillViewport="false" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tabs_Reportes"
-        android:layout_gravity="left|top"
-        >
+        android:background="@android:color/background_light"/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></TabWidget>
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/Reporte1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="DFSDFSDFSDFSDFSDFSDFSDF"
-                        android:gravity="center"
-                        android:layout_marginTop="80dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Reporte2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="100dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Reporte3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                        android:layout_marginTop="120dp"
-                        />
-                </LinearLayout>
-            </FrameLayout>
-        </FrameLayout>
-    </TabHost>
-</FrameLayout>
+</LinearLayout>

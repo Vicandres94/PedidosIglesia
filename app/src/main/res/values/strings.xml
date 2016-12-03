@@ -30,7 +30,9 @@
     <string name="msg_menu_Categoria"> Detalles Categoria</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="msg_nombre_Reporte1">Reporte 1</string>
+    <string name="msg_nombre_Reporte2">Reporte 2</string>
+    <string name="msg_nombre_Reporte3">Reporte 3</string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -67,7 +67,7 @@ public class Class_SP_Lista_Actividades {
 
     public static String[] getListaActividades(Context spContext){
         String[] spl = new String[7];
-        spl[0] = Class_SP_Lista_Actividades.getActividadesId(spContext);;
+        spl[0] = Class_SP_Lista_Actividades.getActividadesId(spContext);
         spl[1] = Class_SP_Lista_Actividades.getCategoriaId(spContext);
         spl[2] = Class_SP_Lista_Actividades.getFecha(spContext);
         spl[3] = Class_SP_Lista_Actividades.getEstado(spContext);

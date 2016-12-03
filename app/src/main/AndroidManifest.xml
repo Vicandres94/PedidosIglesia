@@ -32,6 +32,11 @@
             android:name=".Controller.Barra_Menu"
             android:label="@string/title_activity_barra__menu"
             android:theme="@style/AppTheme"></activity>
+
+        <activity
+            android:name=".Controller.Fragment_Reportes"
+            android:label="@string/title_activity_barra__menu"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
